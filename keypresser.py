@@ -19,7 +19,8 @@ def keypress_convert(key,waitsecond,KEYDICT):
                 print("tasks[key].cancel()発動、入力中 = " + str(runtasks))
         print ("key_press_async侵入直前")
         task = asyncio.ensure_future(key_press_async(key, waitsecond))
-        print("キーボードの"+ str(key) + "ボタンが、" + str(waitsecond) + "秒押されます。")
+        print("キーボードの　　　"+ hex(key) + "　　　ボタンが、　　　" + str(waitsecond) + "　　　秒押されます。")
+        print (key)
         tasks[key] = task
     else:
         print("ボタンが3つ入力中なので入力をキャンセルしました。" + str(runtasks))
