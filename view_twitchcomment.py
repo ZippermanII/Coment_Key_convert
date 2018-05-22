@@ -110,8 +110,8 @@ async def twitch_recieve_messages(amount=1024):
 
 if __name__ == '__main__':
 
-    config_json_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'config.json')
-    keyditc_json_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'keydict.json')
+    config_json_path = os.path.join(os.path.abspath(os.path.dirname(__file__)) + "/ignore", 'config.json')
+    keyditc_json_path = os.path.join(os.path.abspath(os.path.dirname(__file__)) + "/ignore", 'keydict.json')
     CONFIG = json.load(open(config_json_path))
     KEYDICT = json.load(open(keyditc_json_path))
 
