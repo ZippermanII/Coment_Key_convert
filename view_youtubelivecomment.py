@@ -59,13 +59,14 @@ async def consumer_handler(websocket, path):
             enabled_command = ["a", "b", "x", "y", "u", "d", "l", "r"]
             enabled_second = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
             if initial in enabled_command:
-                initial = 'n' + initial
+                initial = 'y' + initial
                 waitsecond = 0.5
                 if second in enabled_second:
                     waitsecond = int(second)
                 print(comment)
                 print("コマンドです")
-                keypress_convert(initial, waitsecond, KEYDICT)
+                key = int(KEYDICT[initial], 0)
+                keypress_convert(key, waitsecond, KEYDICT)
             else:
                 print(comment)
 
@@ -73,19 +74,19 @@ async def consumer_handler(websocket, path):
 
 if __name__ == "__main__":
 
-    config_json_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'config.json')
-    keyditc_json_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'keydict.json')
+    config_json_path = os.path.join(os.path.abspath(os.path.dirname(__file__)) + "/ignore", 'config.json')
+    keyditc_json_path = os.path.join(os.path.abspath(os.path.dirname(__file__)) + "/ignore", 'keydict.json')
     CONFIG = json.load(open(config_json_path))
     KEYDICT = json.load(open(keyditc_json_path))
 
-    credentials_path = "credentials.json"
+    credentials_path = os.path.join(os.path.abspath(os.path.dirname(__file__)) + "/ignore", "credentials.json")
     if os.path.exists(credentials_path):
         # 認証済み
         store = Storage(credentials_path)
         credentials = store.get()
     else:
         # 認証処理
-        f = "client.json"
+        f = os.path.join(os.path.abspath(os.path.dirname(__file__)) + "/ignore", "client.json")
         scope = "https://www.googleapis.com/auth/youtube.readonly"
         flow = client.flow_from_clientsecrets(f, scope)
         flow.user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.117 Safari/537.36"
